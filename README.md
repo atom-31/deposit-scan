@@ -11,15 +11,11 @@ Ethereum Deposit Tracker is an internal tool designed to monitor and record ETH 
 - [Setup and Installation](#setup-and-installation)
   - [Prerequisites](#prerequisites)
   - [Environment Variables](#environment-variables)
-  - [Setup .env Variable](#setup-the-.env-variables)
+  - [Setup .env Variable](#setup-the-environment-variables)
   - [Installation Steps](#installation-steps)
-- [Running the Project](#running-the-project)
 - [Usage](#usage)
   - [Grafana Dashboard](#grafana-dashboard)
   - [Telegram Notifications](#telegram-notifications)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Overview
 
@@ -74,6 +70,8 @@ ETHERSCAN_API_KEY=<your_etherscan_api_key>
 POSTGRESQL_PASSWORD=<your_postgresql_password>
 TELEGRAM_BOT_TOKEN=<your_telegram_bot_token>
 TELEGRAM_CHAT_ID=<your_telegram_chat_id>
+DATABASE_URL= 'postgresql://postgres:<POSTGRESQL_PASSWORD>@db:5432/eth_transactions'
+GRAFANA_ADMIN_PASSWORD=<your_grafana_admin_password>
 ```
 
 Create a `.env` file in the /hardhat directory and provide the following environment variables:
@@ -81,7 +79,7 @@ Create a `.env` file in the /hardhat directory and provide the following environ
 ALCHEMY_API=<your_alchemy_api>
 ```
 
-### Setup the `.env` variables
+### Setup The Environment Variables
 
 #### RPC_URL
 - If you are testing directly on the mainnet then you can get the websocket url from alchemy: `https://dashboard.alchemy.com/products/smart-websockets` or
@@ -92,30 +90,66 @@ ALCHEMY_API=<your_alchemy_api>
 
 #### POSTGRESQL_PASSWORD
 - This is the Database password set by you
+  
+#### GRAFANA_ADMIN_PASSWORD
+- This is the Grafana Admin password set by you
+  
+#### ALCHEMY_API
+- Create an app project in [Alchemy](https://dashboard.alchemy.com)
+- Navigate to the App folder and you will find the API key on the top right corner
+
+#### TELEGRAM_BOT_TOKEN & TELEGRAM_CHAT_ID
+To enable Telegram notifications for the Ethereum Deposit Tracker, you need to create a Telegram bot and obtain its Bot Token and Chat ID. Follow these steps:
+
+##### 1. Create a Telegram Bot
+
+1. Open the Telegram app and search for the **BotFather**.
+2. Start a chat with the **BotFather** by clicking on the **Start** button.
+3. To create a new bot, type the command `/newbot` and follow the instructions provided by the **BotFather**:
+   - Provide a name for your bot (e.g., `DepositTrackerBot`).
+   - Choose a unique username for your bot that must end in `bot` (e.g., `DepositTracker_Bot`).
+4. Once the bot is created, **BotFather** will send you a message containing the **Telegram Bot Token**. This token is required for configuring the environment variables.
+
+##### 2. Obtain Your Telegram Chat ID
+
+1. Start a chat with your newly created bot by searching for its username (e.g., `@DepositTracker_Bot`) and clicking **Start**.
+2. Send a simple message like "Hello" to the bot.
+3. To get the **Chat ID**, you can use the following URL in your browser, replacing `<YOUR_BOT_TOKEN>` with the token obtained from **BotFather**:
+
+```bash
+https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates
+```
+
+4. The output will be a JSON object. Look for the `"chat"` object, which will contain the `"id"` field — this is your **Chat ID**.
+
+##### 3. Configure Environment Variables
+
+Add the **Telegram Bot Token** and **Chat ID** to your `.env` file in the root directory:
+
 
 ## Installation Steps
 
-### Clone the Repository:
+### 1. Clone the Repository:
 
 ```bash
 git clone https://github.com/your-username/eth-deposit-tracker.git
 cd eth-deposit-tracker
 ```
-### Add the .env configs
+### 2. Add the .env configs
 
-### Set Up Docker:
+### 3. Set Up Docker:
 Ensure Docker and Docker Compose are installed on your system. Use the provided docker-compose.yml file to set up the application. Navigate to the eth-deposit-tracker directory and run:
 ```bash
 docker-compose up --build
 ```
 
-### Start the Ethereum Node (Hardhat):
+### 4. Start the Ethereum Node (Hardhat):
 Navigate to the hardhat directory and run:
 ```bash
 npx hardhat node
 ```
 
-###C heck Grafana Setup: 
+### 5. Check Grafana Setup: 
 Access Grafana at http://localhost:3000 and import the JSON file provided in the grafana folder to set up the dashboard.
 
 ## Usage
