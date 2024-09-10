@@ -11,6 +11,7 @@ Ethereum Deposit Tracker is an internal tool designed to monitor and record ETH 
 - [Setup and Installation](#setup-and-installation)
   - [Prerequisites](#prerequisites)
   - [Environment Variables](#environment-variables)
+  - [Setup .env Variable](#setup-the-.env-variables)
   - [Installation Steps](#installation-steps)
 - [Running the Project](#running-the-project)
 - [Usage](#usage)
@@ -80,7 +81,17 @@ Create a `.env` file in the /hardhat directory and provide the following environ
 ALCHEMY_API=<your_alchemy_api>
 ```
 
-### Get `.env`
+### Setup the `.env` variables
+
+#### RPC_URL
+- If you are testing directly on the mainnet then you can get the websocket url from alchemy: `https://dashboard.alchemy.com/products/smart-websockets` or
+- You can replace it with `ws://localhost:8545` for testing with hardhat
+
+#### ETHERSCAN_API_KEY
+- You can create an API key in `https://etherscan.io/myapikey`
+
+#### POSTGRESQL_PASSWORD
+- This is the Database password set by you
 
 ## Installation Steps
 
