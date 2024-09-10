@@ -1,8 +1,8 @@
-# Ethereum Deposit Tracker
+#DepositScan - Ethereum Deposit Tracker
 
 Ethereum Deposit Tracker is an internal tool designed to monitor and record ETH deposits on the Beacon Deposit Contract. It fetches real-time deposit data from the Ethereum blockchain, processes the information, stores it in a PostgreSQL database, and visualizes it using Grafana. The tool also provides Telegram notifications for newly detected deposits.
 
-## Table of Contents
+##Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -20,11 +20,11 @@ Ethereum Deposit Tracker is an internal tool designed to monitor and record ETH 
 - [License](#license)
 - [Contact](#contact)
 
-## Overview
+##Overview
 
 The Ethereum Deposit Tracker is built to monitor the Beacon Deposit Contract for ETH deposits, including those made through internal transactions. It uses an Ethereum RPC provider for fetching data, PostgreSQL for storing data, and Grafana for visualizing the metrics. It also sends real-time alerts for new deposits via Telegram.
 
-## Features
+##Features
 
 - **Real-time Monitoring:** Tracks ETH deposits to the Beacon Deposit Contract in real-time.
 - **Internal Transactions Tracking:** Handles internal transactions that may occur within a single deposit.
@@ -33,7 +33,7 @@ The Ethereum Deposit Tracker is built to monitor the Beacon Deposit Contract for
 - **Alerts:** Telegram notifications for new deposits.
 - **Containerized:** Dockerized application for easy setup and deployment.
 
-## Technologies Used
+##Technologies Used
 
 - **Node.js**: JavaScript runtime for server-side scripting.
 - **Web3.js**: Ethereum JavaScript API for blockchain interaction.
@@ -43,7 +43,7 @@ The Ethereum Deposit Tracker is built to monitor the Beacon Deposit Contract for
 - **Docker**: Containerization platform for consistent deployment.
 - **Telegram Bot API**: For sending notifications.
 
-## Architecture
+##Architecture
 
 The application is divided into the following modules:
 
@@ -52,7 +52,7 @@ The application is divided into the following modules:
 3. **Grafana Dashboard**: Provides a visualization layer for deposit data and internal transactions.
 4. **Notification System**: Sends Telegram alerts for newly detected deposits.
 
-## Setup and Installation
+##Setup and Installation
 
 ### Prerequisites
 
@@ -63,7 +63,7 @@ Before you begin, ensure you have the following installed:
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Git](https://git-scm.com/)
 
-### Environment Variables
+###Environment Variables
 
 Create a `.env` file in the /eth-deposit-tracker directory and provide the following environment variables:
 
@@ -80,28 +80,39 @@ Create a `.env` file in the /hardhat directory and provide the following environ
 ALCHEMY_API=<your_alchemy_api>
 ```
 
-## Installation Steps
+###Get `.env`
 
-### Clone the Repository:
+##Installation Steps
+
+###Clone the Repository:
 
 ```bash
 git clone https://github.com/your-username/eth-deposit-tracker.git
 cd eth-deposit-tracker
 ```
-### Add the .env configs
+###Add the .env configs
 
-### Set Up Docker:
+###Set Up Docker:
 Ensure Docker and Docker Compose are installed on your system. Use the provided docker-compose.yml file to set up the application. Navigate to the eth-deposit-tracker directory and run:
 ```bash
 docker-compose up --build
 ```
 
-### Start the Ethereum Node (Hardhat):
+###Start the Ethereum Node (Hardhat):
 Navigate to the hardhat directory and run:
 ```bash
 npx hardhat node
 ```
 
-### Check Grafana Setup: 
+###Check Grafana Setup: 
 Access Grafana at http://localhost:3000 and import the JSON file provided in the grafana folder to set up the dashboard.
 
+##Usage
+###Grafana Dashboard
+- Access Grafana at http://localhost:3000.
+- Use the default credentials (admin/admin) to log in.
+- Import the provided Grafana dashboard JSON file to visualize deposit data.
+
+###Telegram Notifications
+- Ensure the Telegram bot is set up correctly with the TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.
+- The bot will send real-time notifications for newly detected deposits.
