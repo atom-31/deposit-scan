@@ -1,0 +1,18 @@
+const winston = require('winston');
+
+
+// Logger with a console transport and a file transport
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.simple()
+  ),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+  ],
+});
+
+module.exports = logger;
+
